@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>  
+        <!--给实体类起一个别名 user -->  
+        <typeAlias type="com.lonton.bean.TripData" alias="Data" />  
+    </typeAliases>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <!-- 配置数据库连接信息 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://115.28.172.183:3308/travel_temp_colleague" />
+                <property name="username" value="remote7ywAD" />
+                <property name="password" value="fAeBB6209e" />
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <mappers>
+        <!-- 注册travelMapper.xml文件 -->
+        <mapper resource="com/lonton/mapping/ITripMapper.xml"/>
+    </mappers>
+</configuration>

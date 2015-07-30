@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lonton.dao.ITripOperation">
+   <resultMap type="com.lonton.bean.TripData" id="dataResultMap">
+        <id property="target_Id" column="target_id"  />
+        <result property="target_Name" column="name"  />
+        <result property="desc" column="desc"  />
+        <result property="province_Name" column="province_name"  />
+         <result property="city_Name" column="city_name"  />
+    </resultMap> 
+    
+    <!-- 得到Picture对象-->
+    <select id="getPicture"  resultType="com.lonton.bean.Picture">
+       SELECT cover
+       		,trip_name
+       		,target_id 
+       FROM travel_temp_colleague.t_target_img 
+       WHERE   cover like "%hunansheng%" 
+           OR  cover like "%beijing%";
+    </select>
+    
+    <!-- 得到TripData对象-->
+    <select id="getTripData"  resultType="com.lonton.bean.TripData"
+                 resultMap="dataResultMap">
+        SELECT		t1.target_id
+			,t1.name
+			,t1.`desc`
+			,t2.name			AS province_name
+			,(CASE
+					WHEN t3.name IS NULL THEN t2.name
+					ELSE t3.name
+			END
+			)					AS city_name
+FROM		(SELECT		target_id
+						,NAME
+						,`desc`
+						,(CASE
+								WHEN `type` = '-1' THEN target_id
+								ELSE SUBSTRING(relational, 7, 6)
+						END
+						)			AS province_id
+						,(CASE
+								WHEN `type` = '-1' THEN target_id
+								WHEN `type` = '0' OR LENGTH(relational) = 12 THEN SUBSTRING(relational, 7, 6)
+								ELSE SUBSTRING(relational, 13, 6)
+						END
+						)			AS city_id
+			FROM		travel_temp_colleague.t_target
+			)						AS t1
+right JOIN	(SELECT		target_id
+						,NAME
+			FROM		travel_temp_colleague.t_target
+			WHERE		`type` IN ('-1', '0', '1') and (NAME = "湖南" or NAME = "北京")
+			)						AS t2
+ON			t1.province_id = t2.target_id 
+LEFT JOIN	(SELECT		target_id
+						,NAME
+			FROM		travel_temp_colleague.t_target
+			WHERE		`type` IN ('-1', '0', '1')
+			)						AS t3
+ON			t1.city_id = t3.target_id	
+    </select>
+</mapper>
