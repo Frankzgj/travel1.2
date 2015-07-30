@@ -26,7 +26,7 @@ public class DbAndFile {
     //静态快初始化
     static {
         try {
-            reader = Resources.getResourceAsReader("conf.xml");
+            reader = Resources.getResourceAsReader("db.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         } catch (Exception e) {
             e.printStackTrace();

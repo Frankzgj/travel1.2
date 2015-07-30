@@ -7,7 +7,7 @@ package com.lonton.service;
 import java.util.ArrayList;
 
 import com.lonton.bean.TripData;
-import com.lonton.util.FileOperation;
+import com.lonton.util.FileUtil;
 
 /**
  * 创建存储路径，并将信息存入文件
@@ -16,7 +16,7 @@ import com.lonton.util.FileOperation;
  */
 public class FileDirs {
 	
-	FileOperation fileOperation = new FileOperation();
+	FileUtil fileOperation = new FileUtil();
 	
 	/**
 	 * 创建存储路径,包括文本和图片的

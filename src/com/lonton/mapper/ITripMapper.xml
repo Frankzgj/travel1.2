@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lonton.dao.ITripOperation">
+<mapper>
    <resultMap type="com.lonton.bean.TripData" id="dataResultMap">
         <id property="target_Id" column="target_id"  />
         <result property="target_Name" column="name"  />
@@ -16,7 +16,7 @@
        		,target_id 
        FROM travel_temp_colleague.t_target_img 
        WHERE   cover like "%hunansheng%" 
-           OR  cover like "%beijing%";
+           OR  cover like "%beijing%"
     </select>
     
     <!-- 得到TripData对象-->
