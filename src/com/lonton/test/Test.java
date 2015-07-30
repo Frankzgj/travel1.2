@@ -12,9 +12,8 @@ public class Test {
 	public static void main(String[] args) {
 		DbAndFile daf = new DbAndFile(); 
 		daf.control();
-		
+		范德萨发生倒萨的 犯得上
 	}
 	
 
 }
-
